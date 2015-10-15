@@ -16,8 +16,8 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   means <- c();
   for (i in id) {
     csv <- read.csv(paste0(directory, "/", formatC(i, width = 3, flag = "0"), ".csv"));
-    csv[[pollutant]][is.na(csv[[pollutant]])] <- 0;
-    means <- c(means, mean(csv[[pollutant]]));
+    sdf1 <- csv[complete.cases(csv),][[pollutant]];
+    means <- c(means, mean(sdf1));
   }
   mean(means)
 }
