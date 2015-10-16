@@ -13,11 +13,10 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   ## in the 'id' vector (ignoring NA values)
   ## NOTE: Do not round the result!
   
-  means <- c();
+  sdf1 <- vector();
   for (i in id) {
     csv <- read.csv(paste0(directory, "/", formatC(i, width = 3, flag = "0"), ".csv"));
-    sdf1 <- csv[complete.cases(csv),][[pollutant]];
-    means <- c(means, mean(sdf1));
+    sdf1 <- c(sdf1, csv[!is.na(csv[[pollutant]]),][[pollutant]]);
   }
-  mean(means)
+  mean(sdf1)
 }
